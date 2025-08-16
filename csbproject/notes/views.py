@@ -26,8 +26,16 @@ def logout_view(request):
 
 @login_required
 def index(request):
-    account, _ = Account.objects.get_or_create(user=request.user)
-    notes = Note.objects.filter(account=account)
+    # account, _ = Account.objects.get_or_create(user=request.user)
+    # notes = Note.objects.filter(account=account)
+    username = request.user.username
+
+    notes = Note.objects.raw(
+        f"SELECT notes_note.* FROM notes_note "
+        f"JOIN notes_account ON notes_note.account_id = notes_account.id "
+        f"WHERE notes_account.name = '{username}'"
+    )
+    
     return render(request, 'notes/index.html', {'items': notes})
 
 @login_required
