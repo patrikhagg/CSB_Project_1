@@ -28,9 +28,11 @@
             <button type="submit">Clear</button>
         </form>
 
-        <form action="{% url 'logout' %}" method="post">
+        
+        <form action="{% url 'logout' %}" method="POST">
         {% csrf_token %}
         <button type="submit">Log Out</button>
         </form>
+
     </body>
 </html>
