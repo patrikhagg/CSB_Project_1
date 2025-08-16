@@ -3,7 +3,26 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Account, Note
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def vulnerable_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            return HttpResponse("Invalid credentials", status=401)
+    return render(request, 'notes/login.html')
+
+@csrf_exempt
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 @login_required
 def index(request):
@@ -26,7 +45,3 @@ def erasePageView(request):
     account, _ = Account.objects.get_or_create(user=request.user)
     Note.objects.filter(account=account).delete()
     return render(request, 'notes/index.html', {'items': []})
-
-def logout_view(request):
-    logout(request)
-    return redirect('login')

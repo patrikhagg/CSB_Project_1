@@ -17,22 +17,25 @@
 
         <h2>Add notes to list</h2>
         <form action="/add" method="POST">
-            {% csrf_token %}
+            <!-- {% csrf_token %} -->
             <input type="text" name="content" placeholder="Write a note" required>
             <button type="submit">Add</button>
         </form>
 
         <h2>Clear notes</h2>
         <form action="/clear" method="POST">
-            {% csrf_token %}
+            <!-- {% csrf_token %} -->
             <button type="submit">Clear</button>
         </form>
 
-        
+        <!--
         <form action="{% url 'logout' %}" method="POST">
         {% csrf_token %}
         <button type="submit">Log Out</button>
         </form>
+        -->
+
+        <a href="{% url 'logout' %}">Log Out</a>
 
     </body>
 </html>
