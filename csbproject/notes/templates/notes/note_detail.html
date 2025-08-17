@@ -4,7 +4,10 @@
     <title>Note Detail</title>
 </head>
 <body>
-    <h1>Note Detail</h1>
+    <h1>Logged In Account:</h1>
+    <p><strong>Logged In As:</strong> {{ user.account.name }}</p>
+    <p><strong>Logged In Account ID:</strong> {{ user.account.id }}</p>
+    <h2>Note Details:</h2>
     <p><strong>ID:</strong> {{ note.id }}</p>
     <p><strong>Content:</strong> {{ note.content }}</p>
     <p><strong>Owner Account ID:</strong> {{ note.account.id }}</p>

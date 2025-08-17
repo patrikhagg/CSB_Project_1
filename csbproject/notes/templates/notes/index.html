@@ -5,11 +5,12 @@
     </head>
 
     <body>
+        <p><strong>Logged in as:</strong> {{ user.account.name }}</p>
         <h1>Here are your notes</h1>
 
         <ul>
             {% for item in items %}
-                <li>{{item.content}} (ID: {{item.id}})</li>
+                <li>{{item.content}} (ID: {{item.id}}) (Owner Name: {{item.account.name}})</li>
             {% endfor %}
 		</ul>
 
