@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Note Detail</title>
+</head>
+<body>
+    <h1>Note Detail</h1>
+    <p><strong>ID:</strong> {{ note.id }}</p>
+    <p><strong>Content:</strong> {{ note.content }}</p>
+    <p><strong>Owner Account ID:</strong> {{ note.account.id }}</p>
+    <p><strong>Owner Name:</strong> {{ note.account.name }}</p>
+    <a href="{% url 'index' %}">Back to notes</a>
+</body>
+</html>

@@ -19,6 +19,28 @@ def vulnerable_login(request):
             return HttpResponse("Invalid credentials", status=401)
     return render(request, 'notes/login.html')
 
+@login_required
+def view_note(request, note_id):
+    #account, _ = Account.objects.get_or_create(user=request.user)
+    #try:
+    #    note = Note.objects.get(id=note_id, account=account)
+    #except Note.DoesNotExist:
+    #    return HttpResponse("Forbidden", status=403)
+    note = Note.objects.get(id=note_id)
+    return render(request, 'notes/note_detail.html', {'note': note})
+
+@login_required
+def delete_note(request, note_id):
+    #account, _ = Account.objects.get_or_create(user=request.user)
+    #note = Note.objects.filter(id=note_id, account=account)
+    #if note.exists():
+    #    note.delete()
+    #    return redirect('index')
+    #else:
+    #    return HttpResponse("Forbidden", status=403)
+    Note.objects.filter(id=note_id).delete()
+    return redirect('index')
+
 @csrf_exempt
 def logout_view(request):
     logout(request)
